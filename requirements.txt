@@ -1,0 +1,14 @@
+numpy
+pandas
+yfinance
+scikit-learn
+torch
+transformers
+jupyter
+quarto
+wandb
+seaborn
+matplotlib
+borch
+openai
+python-dotenv
