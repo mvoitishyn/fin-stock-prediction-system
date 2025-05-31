@@ -1,0 +1,19 @@
+model,transformations,features,target,train MSE,test MSE
+LinearRegression_INTC_1,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: True",1,8.54e-05,2.46e-05
+LinearRegression_INTC_3,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: True",3,0.0003072,9.94e-05
+LinearRegression_INTC_1,"Scaled: True, Non-linear: False","Baseline: True, Macro: False, Extra: False",1,0.0003911,0.0001145
+LinearRegression_INTC_1,"Scaled: True, Non-linear: True","Baseline: True, Macro: False, Extra: False",1,0.0003449,0.0001236
+LinearRegression_INTC_1,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: False",1,0.0003887,0.0001306
+LinearRegression_INTC_5,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: True",5,0.0004046,0.0001354
+LinearRegression_INTC_3,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: False",3,0.0004911,0.0001487
+LinearRegression_INTC_3,"Scaled: True, Non-linear: False","Baseline: True, Macro: False, Extra: False",3,0.0004949,0.0001498
+LinearRegression_INTC_3,"Scaled: True, Non-linear: True","Baseline: True, Macro: False, Extra: False",3,0.0004662,0.0001504
+LinearRegression_INTC_5,"Scaled: True, Non-linear: False","Baseline: True, Macro: True, Extra: False",5,0.0005373,0.0001643
+LinearRegression_INTC_5,"Scaled: True, Non-linear: False","Baseline: True, Macro: False, Extra: False",5,0.0005403,0.0001686
+LinearRegression_INTC_5,"Scaled: True, Non-linear: True","Baseline: True, Macro: False, Extra: False",5,0.0005194,0.0001709
+LinearRegression_INTC_1,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: False",1,0.0003306,0.0005462
+LinearRegression_INTC_3,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: False",3,0.0004341,0.0012061
+LinearRegression_INTC_5,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: False",5,0.0004853,0.0020059
+LinearRegression_INTC_1,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: True",1,4.3e-06,2998.1077005
+LinearRegression_INTC_3,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: True",3,2.2e-05,5777.8738421
+LinearRegression_INTC_5,"Scaled: True, Non-linear: True","Baseline: True, Macro: True, Extra: True",5,2.65e-05,41486.3026837

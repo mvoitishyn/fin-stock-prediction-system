@@ -1,0 +1,10 @@
+model,transformations,features,target,train MSE,test MSE
+cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w3_neural_network.pkl,Scaled: True,"Baseline: True, Macro: False, Extra: False",3,0.0005197386725004421,0.00016709575902276307
+cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w3_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: True",3,0.0004438165130627035,0.00016801270531354684
+cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w5_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: True",5,0.0005508337424635262,0.00016902641357165925
+cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w1_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: True",1,0.0002710648254784145,0.00017948167339437818
+cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w5_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: False",5,0.0006271737947112869,0.00019786825504517267
+cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w5_neural_network.pkl,Scaled: True,"Baseline: True, Macro: False, Extra: False",5,0.0006277927403407277,0.00019833815102950257
+cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w1_neural_network.pkl,Scaled: True,"Baseline: True, Macro: False, Extra: False",1,0.000639888381692239,0.00020068459009762023
+cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w3_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: False",3,0.0006262691422210463,0.00020755282898834364
+cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w1_neural_network.pkl,Scaled: True,"Baseline: True, Macro: True, Extra: False",1,0.0006379616043828756,0.0005372924719044055
