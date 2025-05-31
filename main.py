@@ -1,22 +1,15 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-
 from datetime import timedelta
-import numpy as np
-
 import time
-
-import torch
-torch.classes.__path__ = []
-
-from model import featurize_data_for_prediction
-from linearmodels import predict_linear_model
-from neuralnetworks import predict_neural_network
-from bayesianneuralnetworks import predict_bayesian_model
-from process import process_dataset
-from trainmodel import run_linear_single_model, run_single_neural_network, run_bayesian_single_model
-from plots import plot_moving_averages_interactive, plot_macro_features_interactive, plot_bollinger_bands_interactive, plot_targets_interactive
+from backend.app.linearmodels import predict_linear_model
+from backend.app.neuralnetworks import predict_neural_network
+from backend.app.bayesianneuralnetworks import predict_bayesian_model
+from backend.app.process import process_dataset
+from backend.app.trainmodel import run_linear_single_model, run_single_neural_network, run_bayesian_single_model
+from backend.app.plots import plot_moving_averages_interactive, plot_macro_features_interactive, plot_bollinger_bands_interactive, plot_targets_interactive
 
 def main():
     st.set_page_config(page_title="Thesis Financial Forecasting", layout="wide")
@@ -36,7 +29,7 @@ def main():
         "Train Neural Network",
         "Predict Neural Network",
         "Train Bayesian Model",
-        # "Predict Bayesian Model" fishy area better to hide
+        # "Predict Bayesian Model" TODO: FIX!!!
     ]
     page = st.sidebar.radio("Go to", pages)
 

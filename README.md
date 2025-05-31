@@ -1,7 +1,8 @@
 # Finstock Prediction System
 
-Hybrid AI model for Financial Markets Prediction
+Developing a Hybrid AI model for Financial Market Prediction
 
-## Qick start 
+## Getting started
 
-In your local environment run ``pip install -r requirements.txt``
+- In order to spin up MLflow `mlflow server --host 127.0.0.1 --port 8080` from the root directory.
+- In order to spin up Streamlit `streamlit run backend/app/demo.py` from the root directory.
