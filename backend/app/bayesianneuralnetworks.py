@@ -1,5 +1,6 @@
-from model import load_data, featurize_data, scale_data, plot_actual_vs_predicted_bayesian, reconstruct_from_windows, featurize_data_for_prediction
-from model_classes import BayesianNeuralNet_v0, BayesianNeuralNet_v1, BayesianNeuralNet_v2, BayesianNeuralNet_v3, BayesianNeuralNet_v4, BayesianNeuralNet_v5
+from app.model import load_data, featurize_data, scale_data, plot_actual_vs_predicted_bayesian, reconstruct_from_windows, featurize_data_for_prediction
+from app.model_classes import BayesianNeuralNet_v0, BayesianNeuralNet_v1, BayesianNeuralNet_v2, BayesianNeuralNet_v3, BayesianNeuralNet_v4, BayesianNeuralNet_v5
+from app.bnn_experiments_classes import bnn_normal_relu_loc_scale, bnn_normal_relu_loc, bnn_normal_tanh_loc, bnn_studentt_relu_loc_scale, bnn_normal_tanh_loc_scale, bnn_studentt_tanh_loc_scale, bnn_studentt_relu_loc, bnn_studentt_tanh_loc
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
@@ -74,7 +75,7 @@ def train_and_eval_bnn_model(
         except:
             y_test_tensor = torch.tensor(y_test, dtype=torch.float32)
     
-    model = BayesianNeuralNet_v5(
+    model = bnn_studentt_tanh_loc(
         ticker, 
         n_features, 
         n_targets,
@@ -203,12 +204,15 @@ def train_and_eval_bnn_model(
 
     mlflow.end_run()
     
-    target_distribution = "StudentT"
+    target_distribution = "StudenT"
     
     results = {
         "model": model_save_path,
         "transformations": f"Scaled: {scale}, Target Distribution: {target_distribution}",
+        "targets": "location",
         "features": f"Baseline: {use_baseline_data_bool}, Macro: {use_macro_data_bool}, Extra: {use_extra_data_bool}",
+        "activation_function": "TanH",
+        "hidden_neurons": hidden_neurons,
         "target": target_window,
         "train MSE": mse_train,
         "test MSE": mse_test 

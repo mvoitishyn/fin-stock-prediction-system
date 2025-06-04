@@ -1,10 +1,2 @@
-model,transformations,features,target,train MSE,test MSE
-cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w5_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: False",5,0.000647733397214051,0.00021049946462130262
-cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w5_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: True",5,0.000648667569619901,0.00021298114856115516
-cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w3_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: True",3,0.0006225781914067738,0.00021466368816446218
-cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w3_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: False",3,0.0006747260602245541,0.00022808723586140669
-cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w1_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: False, Extra: False",1,0.0006759922911347625,0.00023100024602028707
-cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w5_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: False, Extra: False",5,0.0006433151718681848,0.00023723908929803734
-cachedir/INTC_bsTrue_macTrue_exFalse_scTrue_w1_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: False",1,0.0006960835059823866,0.00023856831637126424
-cachedir/INTC_bsTrue_macFalse_exFalse_scTrue_w3_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: False, Extra: False",3,0.0008836018584440545,0.000465310834575732
-cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w1_bayesian_model.pkl,"Scaled: True, Target Distribution: StudentT","Baseline: True, Macro: True, Extra: True",1,0.0016135845804817303,0.001745420535152327
+model,transformations,targets,features,activation_function,hidden_neurons,target,train MSE,test MSE
+cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w5_bayesian_model.pkl,"Scaled: True, Target Distribution: StudenT",location,"Baseline: True, Macro: True, Extra: True",TanH,9,5,0.004317522048516822,0.0035726539110120963

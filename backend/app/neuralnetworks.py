@@ -1,5 +1,5 @@
-from model import load_data, featurize_data, featurize_data_for_prediction, scale_data, reconstruct_from_windows, plot_actual_vs_predicted
-from model_classes import SimpleNN_v0, SimpleNN_v1, SimpleNN_v2
+from app.model import load_data, featurize_data, featurize_data_for_prediction, scale_data, reconstruct_from_windows, plot_actual_vs_predicted
+from app.model_classes import SimpleNN_v0, SimpleNN_v1, SimpleNN_v2
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 

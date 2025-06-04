@@ -1,6 +1,6 @@
-from linearmodels import build_and_evaluate_linear_regression
-from neuralnetworks import train_simple_nn
-from bayesianneuralnetworks import train_and_eval_bnn_model
+from app.linearmodels import build_and_evaluate_linear_regression
+from app.neuralnetworks import train_simple_nn
+from app.bayesianneuralnetworks import train_and_eval_bnn_model
 
 import pandas as pd
 
@@ -28,7 +28,7 @@ def run_linear_single_model(
     model, actual, predicted, results = output
 
     results_df = pd.DataFrame([results])
-    results_df.to_csv("results/linear_single_model_result.csv", index=False)
+    results_df.to_csv("../results/linear_single_model_result.csv", index=False)
 
     return results_df
 
@@ -167,7 +167,7 @@ def run_bayesian_single_model(
 
     model, actual, predicted, results = output
     results_df = pd.DataFrame([results])
-    results_df.to_csv("results/bayesian_neural_networks_results.csv", index=False)
+    results_df.to_csv("../results/bayesian_neural_networks_results.csv", index=False)
 
     return model, actual, predicted, results_df
 
