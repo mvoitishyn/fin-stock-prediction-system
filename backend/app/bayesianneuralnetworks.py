@@ -1,6 +1,6 @@
-from app.model import load_data, featurize_data, scale_data, plot_actual_vs_predicted_bayesian, reconstruct_from_windows, featurize_data_for_prediction
-from app.model_classes import BayesianNeuralNet_v0, BayesianNeuralNet_v1, BayesianNeuralNet_v2, BayesianNeuralNet_v3, BayesianNeuralNet_v4, BayesianNeuralNet_v5
-from app.bnn_experiments_classes import bnn_normal_relu_loc_scale, bnn_normal_relu_loc, bnn_normal_tanh_loc, bnn_studentt_relu_loc_scale, bnn_normal_tanh_loc_scale, bnn_studentt_tanh_loc_scale, bnn_studentt_relu_loc, bnn_studentt_tanh_loc
+from model import load_data, featurize_data, scale_data, plot_actual_vs_predicted_bayesian, reconstruct_from_windows, featurize_data_for_prediction
+from model_classes import BayesianNeuralNet_v0, BayesianNeuralNet_v1, BayesianNeuralNet_v2, BayesianNeuralNet_v3, BayesianNeuralNet_v4, BayesianNeuralNet_v5
+from bnn_experiments_classes import bnn_normal_relu_loc_scale, bnn_normal_relu_loc, bnn_normal_tanh_loc, bnn_studentt_relu_loc_scale, bnn_normal_tanh_loc_scale, bnn_studentt_tanh_loc_scale, bnn_studentt_relu_loc, bnn_studentt_tanh_loc
 
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 

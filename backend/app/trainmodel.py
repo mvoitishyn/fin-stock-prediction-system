@@ -1,6 +1,6 @@
-from app.linearmodels import build_and_evaluate_linear_regression
-from app.neuralnetworks import train_simple_nn
-from app.bayesianneuralnetworks import train_and_eval_bnn_model
+from linearmodels import build_and_evaluate_linear_regression
+from neuralnetworks import train_simple_nn
+from bayesianneuralnetworks import train_and_eval_bnn_model
 
 import pandas as pd
 

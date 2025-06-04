@@ -1,2 +1,2 @@
 model,transformations,targets,features,activation_function,hidden_neurons,target,train MSE,test MSE
-cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w5_bayesian_model.pkl,"Scaled: True, Target Distribution: StudenT",location,"Baseline: True, Macro: True, Extra: True",TanH,9,5,0.004317522048516822,0.0035726539110120963
+cachedir/INTC_bsTrue_macTrue_exTrue_scTrue_w1_bayesian_model.pkl,"Scaled: True, Target Distribution: StudenT",location,"Baseline: True, Macro: True, Extra: True",TanH,1,1,0.0007917120264093315,0.00036319190788271

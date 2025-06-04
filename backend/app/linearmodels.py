@@ -2,7 +2,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import PolynomialFeatures
 
-from app.model import load_data, featurize_data, featurize_data_for_prediction, scale_data, plot_actual_vs_predicted, reconstruct_from_windows
+from model import load_data, featurize_data, featurize_data_for_prediction, scale_data, plot_actual_vs_predicted, reconstruct_from_windows
 
 import mlflow
 import numpy as np
