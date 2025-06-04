@@ -29,7 +29,7 @@ def main():
         "Train Neural Network",
         "Predict Neural Network",
         "Train Bayesian Model",
-        # "Predict Bayesian Model" TODO: FIX!!!
+        "Predict Bayesian Model"
     ]
     page = st.sidebar.radio("Go to", pages)
 
