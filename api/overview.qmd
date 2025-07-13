@@ -1,0 +1,241 @@
+---
+title: "5-Minute Automated Trading System API Architecture"
+author: "Mykyta Voitishyn"
+date: today
+format: html
+execute:
+  echo: true
+  warning: false
+---
+
+## Overview
+
+This document describes the System infrastructure for a real-time cryptocurrency trading system that executes trades every 5 minutes using Bayesian Probabilistc Deep Neural Networks AI models for automated market analytics and execution.
+
+## System Architecture
+
+```{mermaid}
+graph TD
+    A[Binance/Other exchange API] -->|5min/Could be more OHLCV Data| B[Data Collection Service]
+    B --> C[Data Storage PostgreSQL]
+    C --> D[AI Model Service]
+    D -->|Predictions| E[Trading Engine]
+    E -->|Buy/Sell Orders| F[Binance Trading API]
+    G[Discord Bot] -->|Alerts| H[Discord Channel]
+    E --> G
+    I[Web Dashboard] --> C
+    I --> D
+```
+
+## Data Flow Process
+
+### 1. Data Collection (Every 5 Minutes)
+
+```python
+import requests
+import pandas as pd
+
+def fetch_live_data():
+    response = requests.get("https://api.binance.com/api/v3/klines", 
+                           params={
+                               "symbol": "BTCUSDT",
+                               "interval": "5m",
+                               "limit": 100
+                           })
+    return pd.DataFrame(response.json())
+```
+
+### 2. Data Processing Pipeline
+
+```{mermaid}
+sequenceDiagram
+    participant T as Timer (5min)
+    participant API as Binance API
+    participant DB as Database
+    participant AI as AI Model
+    participant TE as Trading Engine
+    participant EX as Exchange
+    
+    T->>API: Request latest 5min candle
+    API->>DB: Store OHLCV data
+    DB->>AI: Feed historical + new data
+    AI->>TE: Return prediction (buy/sell/hold)
+    TE->>EX: Execute trade order
+    EX->>TE: Confirm execution
+    TE->>Discord: Send alert
+```
+
+## API Endpoints Structure
+
+### Data Collection Service
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/data/collect` | POST | Trigger manual data collection |
+| `/api/data/status` | GET | Check collection service status |
+| `/api/data/latest/{symbol}` | GET | Get latest candle data |
+
+### AI Model Service
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/model/predict` | POST | Get price prediction |
+| `/api/model/retrain` | POST | Trigger model retraining |
+| `/api/model/metrics` | GET | Get model performance |
+
+### Trading Engine
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/trade/execute` | POST | Execute trade order |
+| `/api/trade/history` | GET | Get trading history |
+| `/api/trade/balance` | GET | Get account balance |
+
+## Technical Implementation
+
+### Real-time Data Processing
+
+```python
+import asyncio
+import websockets
+import json
+
+async def websocket_stream():
+    uri = "wss://stream.binance.com:9443/ws/btcusdt@kline_5m"
+    async with websockets.connect(uri) as websocket:
+        async for message in websocket:
+            data = json.loads(message)
+            if data['k']['x']:  # Candle is closed
+                process_new_candle(data['k'])
+```
+
+### AI Model Integration
+
+```{mermaid}
+graph LR
+    A[Raw OHLCV Data] --> B[Feature Engineering]
+    B --> C[Technical Indicators]
+    C --> D[LSTM Neural Network]
+    D --> E[Price Direction Prediction]
+    E --> F[Trading Signal]
+```
+
+## Risk Management
+
+### Position Sizing
+
+- Maximum 2% risk per trade
+- Stop-loss at 1% below entry
+- Take-profit at 2:1 risk-reward ratio
+
+### API Rate Limits
+
+- Binance: 1200 requests/minute
+- Implement exponential backoff
+- Use WebSocket for real-time data
+
+## Error Handling & Monitoring
+
+```python
+class TradingSystem:
+    def __init__(self):
+        self.max_retries = 3
+        self.retry_delay = 1
+    
+    async def safe_api_call(self, func, *args, **kwargs):
+        for attempt in range(self.max_retries):
+            try:
+                return await func(*args, **kwargs)
+            except Exception as e:
+                if attempt == self.max_retries - 1:
+                    await self.send_alert(f"API call failed: {e}")
+                    raise
+                await asyncio.sleep(self.retry_delay * (2 ** attempt))
+```
+
+## Discord Integration
+
+### Alert Types
+
+- Trade execution confirmations
+- Model prediction accuracy updates
+- System health monitoring
+- Portfolio performance summaries
+
+### Sample Alert Format
+
+```json
+{
+  "embeds": [{
+    "title": "Trade Executed",
+    "description": "BUY 0.01 BTC at $45,230",
+    "color": 0x00ff00,
+    "fields": [
+      {"name": "Confidence", "value": "85%"},
+      {"name": "Expected Return", "value": "2.5%"}
+    ]
+  }]
+}
+```
+
+## Performance Metrics
+
+### Key Performance Indicators (KPIs)
+
+```{mermaid}
+pie title Trading Performance Metrics
+    "Win Rate" : 65
+    "Average Return" : 15
+    "Sharpe Ratio" : 20
+```
+
+- **Win Rate**: Target > 60%
+- **Sharpe Ratio**: Target > 1.5
+- **Maximum Drawdown**: Keep < 10%
+- **Average Trade Duration**: ~4 hours
+
+## Deployment Architecture
+
+### Server Requirements
+
+- **CPU**: 4 cores minimum
+- **RAM**: 16GB for AI model inference
+- **Storage**: SSD for fast data access
+- **Network**: Low latency connection
+
+### Technology Stack
+
+- **Backend**: FastAPI (Python)
+- **Database**: PostgreSQL + Redis (caching)
+- **AI Framework**: PyTorch/TensorFlow
+- **Message Queue**: Celery + Redis
+- **Monitoring**: Prometheus + Grafana
+
+## Security Considerations
+
+1. **API Key Management**
+   - Store in environment variables
+   - Use separate keys for testnet/mainnet
+   - Implement key rotation
+
+2. **Rate Limiting**
+   - Implement request throttling
+   - Monitor API usage
+   - Fallback to backup endpoints
+
+3. **Trade Validation**
+   - Verify order parameters
+   - Check account balance
+   - Implement position limits
+
+## Future Enhancements
+
+- Multi-exchange support (Coinbase, Kraken)
+- Portfolio diversification across multiple cryptocurrencies
+- Advanced ML models (Transformer architectures)
+- Real-time sentiment analysis integration
+- Mobile app for monitoring and manual override
+
+## Conclusion
+
+This 5-minute automated trading system combines real-time data processing, AI-driven predictions, and robust risk management to create a fully automated cryptocurrency trading solution. The modular API architecture ensures scalability and maintainability while providing comprehensive monitoring and alerting capabilities.
