@@ -224,8 +224,10 @@ def process_dataset(ticker, min_date, max_date):
     merged_df.dropna(inplace=True)
     
     # sentiment data based on Z_score
-    anomaly_scores = run_llm(ticker)
-    merged_df = pd.merge(merged_df, anomaly_scores, on = "Date", how="left")
-    resdf = merged_df.fillna(0)
+    # disable llm for now
+    if False:
+        anomaly_scores = run_llm(ticker)
+        merged_df = pd.merge(merged_df, anomaly_scores, on = "Date", how="left")
+        resdf = merged_df.fillna(0)
           
-    return resdf
+    return merged_df
