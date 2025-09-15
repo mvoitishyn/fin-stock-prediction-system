@@ -1,52 +1,61 @@
 import requests
-import json
-import pandas as pd 
+import pandas as pd
+import time
+from datetime import datetime, timedelta
 
-
-# testing connection
-try:
-    response = requests.get("https://api.binance.com/api/v3/exchangeInfo")
+def get_klines_batch(symbol, interval, start_time_ms, limit=1000):
+    url = "https://api.binance.com/api/v3/klines"
+    params = {
+        "symbol": symbol,
+        "interval": interval,
+        "startTime": start_time_ms,
+        "limit": limit
+    }
+    response = requests.get(url, params=params)
     response.raise_for_status()
-    data = json.loads(response.text)
-    
-    
-    print("Connected successfully")
-    
-    print(f"Symbols available: {len(data["symbols"])}")
-    print(f"Server time: {data["serverTime"]}")
+    return response.json()
 
-except requests.exceptions.RequestException as e:
-    print(f"Connnection failed: {e}")
+def fetch_all_klines(symbol="BTCUSDT", interval="5m", start_date="2017-08-17"):
+    start_time = int(datetime.strptime(start_date, "%Y-%m-%d").timestamp() * 1000)
+    end_time = int(time.time() * 1000)
 
+    all_klines = []
+    print("The downloading process has been initiated")
 
-# test sample data
-try:
-    klines_response = requests.get("https://api.binance.com/api/v3/klines",
-                                    params = {
-                                        "symbol": "BTCUSDT",
-                                        "interval": "5m",
-                                        "limit": 1000
-                                    })
-    
-    klines_response.raise_for_status()
-    klines_data = json.loads(klines_response.text)
-    
-    print(f"BTC 5-minute data fetched: {len(klines_data)} candles")
-    print(f"Latest row: ${float(klines_data[-1][4])}")
-    
-    klines_df = pd.DataFrame(klines_data, columns=[
+    while start_time < end_time:
+        try:
+            batch = get_klines_batch(symbol, interval, start_time)
+            if not batch:
+                break
+
+            all_klines.extend(batch)
+            
+            start_time = batch[-1][0] + (5 * 60 * 1000)  # next 5m after last open_time
+            print("1000 candles batched is done.")
+            time.sleep(0.2)
+
+        except Exception as e:
+            print(f"Error: {e}. Retrying in 3s...")
+            time.sleep(3)
+
+    print(f"\n✅ Finished downloading {len(all_klines)} klines.")
+    return all_klines
+
+def klines_to_df(klines):
+    df = pd.DataFrame(klines, columns=[
         "open_time", "open", "high", "low", "close", "volume",
         "close_time", "quote_asset_volume", "number_of_trades",
         "taker_buy_base_asset_volume", "taker_buy_quote_asset_volume", "ignore"
-    ])    
-    
-    klines_df["open_time"] = pd.to_datetime(klines_df["open_time"], unit="ms")
-    klines_df["close_time"] = pd.to_datetime(klines_df["close_time"], unit="ms")
-    klines_df[["open", "high", "low", "close", "volume"]] = klines_df[["open", "high", "low", "close", "volume"]].astype(float)
-    
-    klines_df = klines_df.drop(columns="ignore")
-    
-    klines_df.to_csv("../data/crypto/binance/btcusdt5min1000_sample.csv")
+    ])
+    df["open_time"] = pd.to_datetime(df["open_time"], unit="ms")
+    df["close_time"] = pd.to_datetime(df["close_time"], unit="ms")
+    float_cols = ["open", "high", "low", "close", "volume"]
+    df[float_cols] = df[float_cols].astype(float)
+    return df.drop(columns="ignore")
 
-except requests.exceptions.RequestException as e:
-    print(f"Failed to fetch BTC data: {e}")    
+klines = fetch_all_klines()
+df = klines_to_df(klines)
+
+output_path = "../data/crypto/binance/btcusdt_5min_full.csv"
+df.to_csv(output_path, index=False)
+print(f"📁 Data saved to {output_path}")

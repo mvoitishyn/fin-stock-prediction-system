@@ -1,4 +1,2 @@
-# secret keys
-
 - API Key: 85MPtw22UIYyJmqFisv6iKPAkFv2IpaCu9yh9KwMhm0ae22ExxvgruhBZjH4JSWw
 - Secret Key: gcXcJuxeBWIzO6gdnU512mV5k69UuwUVs25o5IVgejR5UwJoVkwVlYa4BLUVcxa8
