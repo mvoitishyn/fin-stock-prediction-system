@@ -1,4 +1,4 @@
-# Finstock Prediction System
+# Finstock Prediction System - BSc Thesis 
 
 Developing a Hybrid AI model for Financial Market Prediction
 
